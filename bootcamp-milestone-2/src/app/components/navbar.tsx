@@ -50,7 +50,7 @@ export default function Navbar() {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/blog" className="text-green-300 hover:underline">
+                            <Link href="/api/Blogs" className="text-green-300 hover:underline">
                                 Blog
                             </Link>
                         </li>
