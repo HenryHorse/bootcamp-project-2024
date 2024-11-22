@@ -1,8 +1,8 @@
 import React from "react";
-import type {ProjectCard} from "@/app/data/projectData";
+import {Project} from "@/database/projectSchema";
 
 
-export default function ProjectCard(props: ProjectCard) {
+export default function ProjectCard(props: Project) {
     const {title, date, description, imageSrc, alt, githubLink, downloadLink, playLink} = props;
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden transform transition hover:scale-105">

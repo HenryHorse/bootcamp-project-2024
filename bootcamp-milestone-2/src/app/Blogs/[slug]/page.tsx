@@ -1,20 +1,18 @@
 import { notFound } from 'next/navigation';
-import blogs from '@/app/data/blogData';
 import Image from 'next/image';
 
 type BlogPageProps = {
-    params: {
-        slug: string;
-    };
+    params: { slug: string; };
 };
+
 
 export default async function BlogPage({ params }: BlogPageProps) {
     const { slug } = await params;
-    const blog = blogs.find((post) => post.slug === slug);
-
+    const blog = await getBlog(slug);
     if (!blog) {
         notFound();
     }
+
 
     return (
         <div className="max-w-4xl mx-auto p-6 mt-8 bg-white shadow-lg rounded-lg">
@@ -28,6 +26,24 @@ export default async function BlogPage({ params }: BlogPageProps) {
             </div>
         </div>
     );
+}
+
+
+async function getBlog(slug: string) {
+    try {
+        const res = await fetch(`http://localhost:3000/api/Blogs/${slug}`, {
+            cache: "no-store",
+        })
+
+        if (!res.ok) {
+            throw new Error("Failed to fetch blog");
+        }
+
+        return res.json();
+    } catch (err: unknown) {
+        console.log(`error: ${err}`);
+        return null;
+    }
 }
 
 

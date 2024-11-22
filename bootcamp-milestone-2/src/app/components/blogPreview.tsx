@@ -1,6 +1,7 @@
 import React from 'react';
 import type {Blog} from "@/database/blogSchema"
 import Image from 'next/image'
+import Link from "next/link";
 
 export default function BlogPreview(props: Blog) {
     const {title, date, description, image, imageAlt, slug} = props;
@@ -13,7 +14,7 @@ export default function BlogPreview(props: Blog) {
             <div className="flex justify-center mt-4">
                 <Image src={image} alt={imageAlt} width={500} height={300} className="rounded-lg"/>
             </div>
-            <a href={`/Blogs/${slug}`} className="text-blue-700 underline">To find out more...</a>
+            <Link href={`/Blogs/${slug}`} className="text-blue-700 underline">To find out more...</Link>
         </div>
     );
 }
