@@ -1,4 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
+import { commentSchema, IComment } from './blogSchema';
 
 export type Project = {
     title: string;
@@ -9,6 +10,7 @@ export type Project = {
     githubLink?: string;
     downloadLink?: string;
     playLink?: string;
+    comments: IComment[];
 }
 
 
@@ -21,6 +23,7 @@ const projectSchema = new Schema<Project>({
     githubLink: { type: String, required: false },
     downloadLink: { type: String, required: false },
     playLink: { type: String, required: false },
+    comments: { type: [commentSchema], default: [] },
 })
 
 const ProjectModel = mongoose.models['projects'] || mongoose.model("projects", projectSchema);

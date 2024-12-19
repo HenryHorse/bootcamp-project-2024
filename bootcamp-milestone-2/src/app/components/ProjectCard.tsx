@@ -1,12 +1,13 @@
 import React from "react";
 import {Project} from "@/database/projectSchema";
-
+import Link from "next/link";
+import Image from "next/image";
 
 export default function ProjectCard(props: Project) {
     const {title, date, description, imageSrc, alt, githubLink, downloadLink, playLink} = props;
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden transform transition hover:scale-105">
-            <img className="w-full h-100 object-cover" src={imageSrc} alt={alt}/>
+            <Image src={imageSrc} alt={alt} width={400} height={300} className="w-full h-auto object-cover" />
             <div className="p-6">
                 {githubLink && (
                     <a href={githubLink} target="_blank"
@@ -18,7 +19,9 @@ export default function ProjectCard(props: Project) {
                         </svg>
                     </a>
                 )}
-                <h3 className="text-2xl font-semibold text-teal-900">{title}</h3>
+                <Link href={`/portfolio/${encodeURIComponent(title)}`}>
+                    <h3 className="text-2xl font-semibold text-teal-900 hover:text-green-300">{title}</h3>
+                </Link>
                 <h4 className="text-xl font-semibold text-teal-900">{date}</h4>
                 <p className="mt-4 text-gray-600">{description}</p>
                 {downloadLink && (
