@@ -10,7 +10,7 @@ type ProjectPageProps = {
 
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-    const {title} = await params;
+    const {title} = params;
     const project = await getProject(title);
     if (!project) {
         notFound();
