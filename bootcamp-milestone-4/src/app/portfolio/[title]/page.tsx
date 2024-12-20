@@ -5,12 +5,12 @@ import {IComment} from "@/database/blogSchema";
 import React from "react";
 
 type ProjectPageProps = {
-    params: { title: string; };
+    params: Promise<{ title: string; }>;
 };
 
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-    const {title} = params;
+    const {title} = await params;
     const project = await getProject(title);
     if (!project) {
         notFound();

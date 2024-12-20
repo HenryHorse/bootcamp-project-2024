@@ -4,12 +4,12 @@ import Comment from '@/app/components/Comment'
 import {IComment} from "@/database/blogSchema";
 
 type BlogPageProps = {
-    params: { slug: string; };
+    params: Promise<{ slug: string }>;
 };
 
 
 export default async function BlogPage({ params }: BlogPageProps) {
-    const { slug } = params;
+    const { slug } = await params;
     const blog = await getBlog(slug);
     if (!blog) {
         notFound();

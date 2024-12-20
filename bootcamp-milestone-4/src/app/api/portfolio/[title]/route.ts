@@ -3,15 +3,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import connectDB from "@/database/db"
 import projectSchema from "@/database/projectSchema";
 
-type IParams = {
-    params: {
-        title: string
-    }
-}
 
-export async function GET(req: NextRequest, { params }: IParams) {
+
+export async function GET(req: NextRequest) {
     await connectDB();
-    const { title } = await params;
+    const encodedTitle = req.nextUrl.pathname.split("/").pop();
+    const title = encodedTitle ? decodeURIComponent(encodedTitle) : null;
+
 
     try {
         const project = await projectSchema.findOne({ title }).orFail()

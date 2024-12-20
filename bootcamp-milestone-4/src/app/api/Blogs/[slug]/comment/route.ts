@@ -2,16 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/database/db';
 import Blog from '@/database/blogSchema';
 
-type IParams = {
-    params: {
-        slug: string
-    }
-}
 
-export async function POST(req: NextRequest, { params }: IParams) {
-    await connectDB;
 
-    const { slug } = await params;
+export async function POST(req: NextRequest) {
+    await connectDB
+
+    const slug = req.nextUrl.pathname.split("/")[3];
     const body = await req.json();
 
     if (!body || !body.user || !body.comment) {
@@ -31,6 +27,6 @@ export async function POST(req: NextRequest, { params }: IParams) {
         return NextResponse.json(updatedBlog, { status: 200 });
     } catch (err) {
         console.error(err);
-        return NextResponse.json({ error: 'Failed to add coment' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to add comment' }, { status: 500 });
     }
 }

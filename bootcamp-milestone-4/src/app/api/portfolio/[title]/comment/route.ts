@@ -2,17 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/database/db';
 import Project from '@/database/projectSchema';
 
-type IParams = {
-    params: {
-        title: string
-    }
-}
 
-export async function POST(req: NextRequest, { params }: IParams) {
+export async function POST(req: NextRequest) {
     await connectDB;
 
 
-    const { title } = await params;
+    const title = req.nextUrl.pathname.split("/")[3];
     const body = await req.json();
     console.log(body);
 
