@@ -32,6 +32,6 @@ async function getProjects() {
         const projects = await ProjectModel.find().lean<Project[]>();
         return projects
     } catch (err) {
-        return null
+        console.error(err);
     }
 }

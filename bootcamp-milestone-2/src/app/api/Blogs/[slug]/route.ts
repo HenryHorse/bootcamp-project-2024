@@ -23,6 +23,7 @@ export async function GET(req: NextRequest, { params }: IParams) {
 
         return NextResponse.json(formattedBlog);
     } catch (err) {
+        console.error(err);
         return NextResponse.json('Blog not found.', { status: 404 })
     }
 }

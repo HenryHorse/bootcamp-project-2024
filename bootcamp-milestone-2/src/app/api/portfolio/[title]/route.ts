@@ -19,6 +19,7 @@ export async function GET(req: NextRequest, { params }: IParams) {
 
         return NextResponse.json(project);
     } catch (err) {
+        console.error(err);
         return NextResponse.json('Project not found.', { status: 404 })
     }
 }

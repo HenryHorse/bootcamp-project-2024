@@ -37,6 +37,7 @@ export default function ContactPage() {
             }
         } catch (error) {
             setStatus('Something went wrong. Please try again later.');
+            console.error(error);
         }
     };
 

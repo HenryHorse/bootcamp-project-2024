@@ -27,6 +27,6 @@ async function getBlogs() {
         const blogs = await BlogModel.find().sort({ date: -1 }).lean<Blog[]>();
         return blogs
     } catch (err) {
-        return null
+        console.error(err);
     }
 }
