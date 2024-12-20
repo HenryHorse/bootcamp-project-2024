@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Comment from '@/app/components/Comment'
 import {IComment} from "@/database/blogSchema";
-import ProjectCard from "@/app/components/ProjectCard";
 import React from "react";
 
 type ProjectPageProps = {
