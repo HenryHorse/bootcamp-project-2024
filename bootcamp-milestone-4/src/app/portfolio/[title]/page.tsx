@@ -69,7 +69,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
 async function getProject(title: string) {
     try {
-        const res = await fetch(`http://localhost:3000/api/portfolio/${title}`, {
+        const res = await fetch(`https://bootcamp-project-2024-h58567t8j-henryhorses-projects.vercel.app/portfolio/${title}`, {
             cache: "no-store",
         })
 

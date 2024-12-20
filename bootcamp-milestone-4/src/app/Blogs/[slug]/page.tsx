@@ -43,7 +43,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
 async function getBlog(slug: string) {
     try {
-        const res = await fetch(`http://localhost:3000/api/Blogs/${slug}`, {
+        const res = await fetch(`https://bootcamp-project-2024-h58567t8j-henryhorses-projects.vercel.app/Blogs/${slug}`, {
             cache: "no-store",
         })
 
