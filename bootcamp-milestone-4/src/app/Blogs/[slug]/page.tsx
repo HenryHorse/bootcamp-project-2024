@@ -43,7 +43,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
 async function getBlog(slug: string) {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || `https://${process.env.VERCEL_URL}`;
         if (!baseUrl) {
             throw new Error("Missing base url");
         }

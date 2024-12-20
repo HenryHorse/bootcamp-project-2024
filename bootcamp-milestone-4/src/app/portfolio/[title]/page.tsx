@@ -69,7 +69,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
 async function getProject(title: string) {
     try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || `https://${process.env.VERCEL_URL}`;
         if (!baseUrl) {
             throw new Error("Missing base url");
         }
