@@ -69,7 +69,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
 async function getProject(title: string) {
     try {
-        const res = await fetch(`https://bootcamp-project-2024-h58567t8j-henryhorses-projects.vercel.app/portfolio/${title}`, {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+        if (!baseUrl) {
+            throw new Error("Missing base url");
+        }
+
+        const res = await fetch(`${baseUrl}/api/portfolio/${title}`, {
             cache: "no-store",
         })
 

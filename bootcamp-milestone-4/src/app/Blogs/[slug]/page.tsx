@@ -43,7 +43,11 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
 async function getBlog(slug: string) {
     try {
-        const res = await fetch(`https://bootcamp-project-2024-h58567t8j-henryhorses-projects.vercel.app/Blogs/${slug}`, {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+        if (!baseUrl) {
+            throw new Error("Missing base url");
+        }
+        const res = await fetch(`${baseUrl}/api/Blogs/${slug}`, {
             cache: "no-store",
         })
 
