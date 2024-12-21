@@ -7,9 +7,9 @@ export async function POST(req: NextRequest) {
     await connectDB;
 
 
-    const title = req.nextUrl.pathname.split("/")[3];
+    const encodedTitle = req.nextUrl.pathname.split("/")[3];
+    const title = encodedTitle ? decodeURIComponent(encodedTitle) : null;
     const body = await req.json();
-    console.log(body);
 
     if (!body || !body.user || !body.comment) {
         return NextResponse.json({ error: 'Invalid request body'}, { status: 400 });

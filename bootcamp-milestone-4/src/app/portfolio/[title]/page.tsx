@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Comment from '@/app/components/Comment'
 import {IComment} from "@/database/blogSchema";
 import React from "react";
+import AddComment from "@/app/components/addComment";
 
 type ProjectPageProps = {
     params: Promise<{ title: string; }>;
@@ -51,7 +52,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 )}
             </div>
             <div>
-                <h2>Comments</h2>
+                <AddComment endpoint={`portfolio/${title}`}/>
+            </div>
+            <div className="mt-10">
+                <h2 className="text-2xl font-bold text-teal-900">Comments</h2>
                 {project.comments && project.comments.length > 0 ? (
                     project.comments.map((comment: IComment, index: number) => (
                         <Comment key={index} comment={comment}></Comment>

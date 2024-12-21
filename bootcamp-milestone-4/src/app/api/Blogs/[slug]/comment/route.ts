@@ -7,7 +7,8 @@ import Blog from '@/database/blogSchema';
 export async function POST(req: NextRequest) {
     await connectDB
 
-    const slug = req.nextUrl.pathname.split("/")[3];
+    const encodedSlug = req.nextUrl.pathname.split("/")[3];
+    const slug = encodedSlug ? decodeURIComponent(encodedSlug) : null;
     const body = await req.json();
 
     if (!body || !body.user || !body.comment) {

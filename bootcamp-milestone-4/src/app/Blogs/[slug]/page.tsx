@@ -1,7 +1,10 @@
+
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Comment from '@/app/components/Comment'
 import {IComment} from "@/database/blogSchema";
+import AddComment from '@/app/components/addComment';
+
 
 type BlogPageProps = {
     params: Promise<{ slug: string }>;
@@ -26,7 +29,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 <Image src={blog.image} alt={blog.imageAlt} width={600} height={300} className="rounded-lg object-cover"/>
             </div>
             <div>
-                <h2>Comments</h2>
+                <AddComment endpoint={`Blogs/${slug}`}/>
+            </div>
+            <div className="mt-10">
+                <h2 className="text-2xl font-bold text-teal-900">Comments</h2>
                 {blog.comments && blog.comments.length > 0 ? (
                     blog.comments.map((comment: IComment, index: number) => (
                         <Comment key={index} comment={comment}></Comment>
