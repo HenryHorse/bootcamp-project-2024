@@ -3,6 +3,12 @@ import connectDB from '@/database/db';
 import Blog from '@/database/blogSchema';
 
 
+function withCORS(response: NextResponse) {
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+    return response;
+}
 
 export async function POST(req: NextRequest) {
     await connectDB
@@ -12,7 +18,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     if (!body || !body.user || !body.comment) {
-        return NextResponse.json({ error: 'Invalid request body'}, { status: 400 });
+        return withCORS(NextResponse.json({ error: 'Invalid request body'}, { status: 400 }));
     }
     try {
         const updatedBlog = await Blog.findOneAndUpdate(
@@ -22,12 +28,12 @@ export async function POST(req: NextRequest) {
         );
 
         if (!updatedBlog) {
-            return NextResponse.json({ error: 'Blog not found'}, { status: 404 });
+            return withCORS(NextResponse.json({ error: 'Blog not found'}, { status: 404 }));
         }
 
-        return NextResponse.json(updatedBlog, { status: 200 });
+        return withCORS(NextResponse.json(updatedBlog, { status: 200 }));
     } catch (err) {
         console.error(err);
-        return NextResponse.json({ error: 'Failed to add comment' }, { status: 500 });
+        return withCORS(NextResponse.json({ error: 'Failed to add comment' }, { status: 500 }));
     }
 }
